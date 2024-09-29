@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Tweets
+{% endblock  %}
+
+{% block content %}
+<h1 class="text-white text-center mt-3 font-extrabold text-5xl">WELCOME to TweetCenter</h1>
+
+
+<h2>
+{% if form.instance.pk  %}Edit Tweet
+
+{% else %} Create Tweet
+
+{% endif%}
+
+</h2>
+
+<form method="post" enctype="multipart/form-data" class="form-input">
+    {% csrf_token %}
+    {{form}}
+
+    <button type="Submit" class="bg-yellow-400 p-1 rounded-lg mt-3">Submit</button>
+
+
+</form>
+{% endblock  %}

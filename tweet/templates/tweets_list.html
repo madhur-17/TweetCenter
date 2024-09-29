@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+TweetCenter
+{% endblock  %}
+
+{% block content %}
+<h1 class="text-white text-center mt-3 font-extrabold text-5xl">WELCOME to TweetCenter</h1>
+
+
+<a href="{% url 'tweets_create' %}" class="bg-blue-600 p-4 rounded-md text-center m-5"> Create</a>
+
+<div class="grid grid-cols-3 items-center mt-5 ">
+    
+    {% for tweet in AllTweets %}
+    
+    <div class="text-white size-72 m-5">
+        {% if tweet.photo %}
+        <img src="{{ tweet.photo.url }}" alt="Tweet Photo">
+        {% else %}
+                <p>No photo available</p>
+            {% endif %}
+        <div>
+          <h5>{{tweet.user.username}}</h5>
+          <p>{{tweet.text}}</p>
+          {% if tweet.user == user %}
+          <div class="flex justify-between ">
+          <a href="{% url 'tweets_edit' tweet.id %}" class="bg-blue-600 p-1 rounded-md text-center">Edit</a>
+          <a href="{% url 'tweets_delete' tweet.id %}" class="bg-red-700 p-1 rounded-md text-center ">Delete</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    
+    {% endfor %}
+</div>
+
+{% endblock  %}
